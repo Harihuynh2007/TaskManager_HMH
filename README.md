@@ -1,6 +1,4 @@
-# Re-saving the README content because previous code session was reset
 
-readme_content = """
 # TaskManager_HMH
 
 ## 1. Giới thiệu
