@@ -1,0 +1,18 @@
+# Bỏ qua thư mục môi trường ảo Python
+venv/
+
+# Bỏ file cache Python
+__pycache__/
+*.py[cod]
+
+# Bỏ file DB và môi trường
+db.sqlite3
+.env
+
+# Node.js (nếu có frontend sau)
+node_modules/
+dist/
+build/
+
+# Hệ điều hành
+.DS_Store
