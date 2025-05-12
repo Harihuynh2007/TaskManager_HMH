@@ -30,15 +30,15 @@ function Sidebar() {
       </div>
 
       {/* MAIN Section */}
-      <div className="text-xs  text-indigo-700 mb-2 font-semibold tracking-wide">MAIN</div>
+      <div className="text-xs   mb-2 font-semibold tracking-wide">MAIN</div>
       <div className="space-y-1">
         {/* Dashboard Expandable */}
         <div>
           <button
             onClick={() => setExpandDashboard(!expandDashboard)}
-            className={`${navItem} ${navHover} w-full justify-between font-bold text-blue-500 hover:bg-blue-500 hover:text-white `}
+            className={`${navItem} ${navHover} w-full justify-between text-blue-600 hover:bg-blue-400 hover:text-white transition-all `}
           >
-            <span className="flex items-center gap-2 text-lg ">
+            <span className="flex items-center gap-2 text-lg font-bold ">
               <FaHome className="transition-all duration-200 " /> Dashboard
             </span>
             <FaChevronDown
@@ -47,11 +47,11 @@ function Sidebar() {
             />
           </button>
           {expandDashboard && (
-            <div className="ml-10 pl-3 border-l border-indigo-300 space-y-1">
+            <div className="ml-10 pl-3 border-l font-semibold border-blue-300 space-y-1">
                 {["Activity", "Traffic", "Statistic"].map((label) => (
                 <div
                     key={label}
-                    className="relative pl-4 text-sm text-gray-700 hover:text-indigo-700 hover:font-medium cursor-pointer transition"
+                    className="relative pl-4 text-sm text-gray-700 hover:text-blue-700 hover:font-medium cursor-pointer transition"
                 >
                     <span className="absolute left-0 top-1/2 w-3 h-px bg-indigo-400"></span>
                     {label}
@@ -63,18 +63,18 @@ function Sidebar() {
             
         </div>
 
-        <NavLink to="/tasks" className={({ isActive }) => `${navItem} ${isActive ? navActive : navHover}  font-bold text-blue-500 hover:bg-blue-500 hover:text-white `}>
-          <span className="flex items-center gap-2 text-lg ">
+        <NavLink to="/tasks" className={({ isActive }) => `${navItem} ${isActive ? navActive : navHover}   w-full justify-between text-blue-600 hover:bg-blue-400 hover:text-white transition-all`}>
+          <span className="flex items-center gap-2 text-lg font-bold ">
             <FaTasks /> Tasks
           </span>
         </NavLink>
-        <NavLink to="/calendar" className={({ isActive }) => `${navItem} ${isActive ? navActive : navHover}  font-bold text-blue-500 hover:bg-blue-500 hover:text-white `}>
-          <span className="flex items-center gap-2 text-lg ">
+        <NavLink to="/calendar" className={({ isActive }) => `${navItem} ${isActive ? navActive : navHover}   w-full justify-between text-blue-600 hover:bg-blue-400 hover:text-white transition-all `}>
+          <span className="flex items-center gap-2 text-lg font-bold ">
             <FaCalendarAlt /> Calendar
           </span>
         </NavLink>
-        <NavLink to="/settings" className={({ isActive }) => `${navItem} ${isActive ? navActive : navHover}  font-bold text-blue-500 hover:bg-blue-500 hover:text-white `}>
-          <span className="flex items-center gap-2 text-lg ">
+        <NavLink to="/settings" className={({ isActive }) => `${navItem} ${isActive ? navActive : navHover}   w-full justify-between text-blue-600 hover:bg-blue-400 hover:text-white transition-all `}>
+          <span className="flex items-center gap-2 text-lg font-bold ">
             <FaCog /> Settings
           </span>
         </NavLink>
