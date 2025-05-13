@@ -36,7 +36,7 @@ function Sidebar() {
         <div>
           <button
             onClick={() => setExpandDashboard(!expandDashboard)}
-            className={`${navItem} ${navHover} w-full justify-between text-blue-600 hover:bg-blue-400 hover:text-white transition-all `}
+            className={`${navItem} ${navHover} w-full justify-between text-blue-500 hover:bg-blue-500 hover:text-white transition-all `}
           >
             <span className="flex items-center gap-2 text-lg font-bold ">
               <FaHome className="transition-all duration-200 " /> Dashboard
@@ -63,17 +63,17 @@ function Sidebar() {
             
         </div>
 
-        <NavLink to="/tasks" className={({ isActive }) => `${navItem} ${isActive ? navActive : navHover}   w-full justify-between text-blue-600 hover:bg-blue-400 hover:text-white transition-all`}>
+        <NavLink to="/tasks" className={({ isActive }) => `${navItem} ${isActive ? navActive : navHover}   w-full justify-between text-blue-500 hover:bg-blue-500 hover:text-white transition-all`}>
           <span className="flex items-center gap-2 text-lg font-bold ">
             <FaTasks /> Tasks
           </span>
         </NavLink>
-        <NavLink to="/calendar" className={({ isActive }) => `${navItem} ${isActive ? navActive : navHover}   w-full justify-between text-blue-600 hover:bg-blue-400 hover:text-white transition-all `}>
+        <NavLink to="/calendar" className={({ isActive }) => `${navItem} ${isActive ? navActive : navHover}   w-full justify-between text-blue-500 hover:bg-blue-500 hover:text-white transition-all `}>
           <span className="flex items-center gap-2 text-lg font-bold ">
             <FaCalendarAlt /> Calendar
           </span>
         </NavLink>
-        <NavLink to="/settings" className={({ isActive }) => `${navItem} ${isActive ? navActive : navHover}   w-full justify-between text-blue-600 hover:bg-blue-400 hover:text-white transition-all `}>
+        <NavLink to="/settings" className={({ isActive }) => `${navItem} ${isActive ? navActive : navHover}   w-full justify-between text-blue-500 hover:bg-blue-500 hover:text-white transition-all `}>
           <span className="flex items-center gap-2 text-lg font-bold ">
             <FaCog /> Settings
           </span>
