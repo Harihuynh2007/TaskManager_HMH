@@ -10,8 +10,7 @@ import {
 } from "react-icons/fa";
 
 
-function Sidebar() {
-  const [showAddTask, setShowAddTask] = useState(false);
+function SideBar(onOpenTask) {
   const [expandDashboard, setExpandDashboard] = useState(true);
 
   const navItem = "flex items-center gap-3 px-4 py-2 text-sm rounded-lg transition-all duration-300 ease-in-out";
@@ -19,7 +18,7 @@ function Sidebar() {
   const navHover = "hover:bg-white/30 hover:translate-x-1 text-indigo-800";
 
   return (
-    <aside className="w-72 min-h-screen bg-white/20 backdrop-blur-md text-gray-800 p-5 flex flex-col rounded-r-3xl shadow-xl">
+    <aside className="w-72 min-h-screen bg-white/20 backdrop-blur-md text-black p-5 flex flex-col rounded-r-3xl shadow-xl">
       {/* User Info */}
       <div className="flex items-center gap-3 mb-8">
         <img src="/avatar.jpg" alt="Avatar" className="w-10 h-10 rounded-full border-2 border-white shadow" />
@@ -36,7 +35,7 @@ function Sidebar() {
         <div>
           <button
             onClick={() => setExpandDashboard(!expandDashboard)}
-            className={`${navItem} ${navHover} w-full justify-between text-blue-500 hover:bg-blue-500 hover:text-white transition-all `}
+            className={`${navItem} ${navHover} w-full  text-gray-500 hover:bg-blue-600 hover:text-white `}
           >
             <span className="flex items-center gap-2 text-lg font-bold ">
               <FaHome className="transition-all duration-200 " /> Dashboard
@@ -63,17 +62,17 @@ function Sidebar() {
             
         </div>
 
-        <NavLink to="/tasks" className={({ isActive }) => `${navItem} ${isActive ? navActive : navHover}   w-full justify-between text-blue-500 hover:bg-blue-500 hover:text-white transition-all`}>
+        <NavLink to="/tasks" className={({ isActive }) => `${navItem} ${isActive ? navActive : navHover}   w-full bg-white text-gray-500 hover:bg-blue-600 hover:text-white`}>
           <span className="flex items-center gap-2 text-lg font-bold ">
             <FaTasks /> Tasks
           </span>
         </NavLink>
-        <NavLink to="/calendar" className={({ isActive }) => `${navItem} ${isActive ? navActive : navHover}   w-full justify-between text-blue-500 hover:bg-blue-500 hover:text-white transition-all `}>
+        <NavLink to="/calendar" className={({ isActive }) => `${navItem} ${isActive ? navActive : navHover} w-full bg-white text-gray-500 hover:bg-blue-600 hover:text-white  `}>
           <span className="flex items-center gap-2 text-lg font-bold ">
             <FaCalendarAlt /> Calendar
           </span>
         </NavLink>
-        <NavLink to="/settings" className={({ isActive }) => `${navItem} ${isActive ? navActive : navHover}   w-full justify-between text-blue-500 hover:bg-blue-500 hover:text-white transition-all `}>
+        <NavLink to="/settings" className={({ isActive }) => `${navItem} ${isActive ? navActive : navHover}   w-full bg-white text-gray-500  hover:bg-blue-600 hover:text-white  `}>
           <span className="flex items-center gap-2 text-lg font-bold ">
             <FaCog /> Settings
           </span>
@@ -88,20 +87,13 @@ function Sidebar() {
         <p className="text-indigo-900 font-semibold mb-1">Let’s start!</p>
         <p className="text-xs text-indigo-700 mb-4">Creating tasks is quick and easy</p>
         <button
-          onClick={() => setShowAddTask(true)}
+          onClick={() => onOpenTask && onOpenTask()}
           className="w-full bg-blue-500 hover:bg-white text-white hover:text-blue-600 py-2 rounded-lg font-semibold shadow transition-all duration-300 hover:scale-105"
         >
           + Add New Task
         </button>
       </div>
 
-      {/* Task popup */}
-      {showAddTask && (
-        <TaskDetailsCard
-          task={{ title: "", list: "Today", description: "" }}
-          onClose={() => setShowAddTask(false)}
-        />
-      )}
 
       {/* Logout */}
       <button
@@ -117,4 +109,4 @@ function Sidebar() {
   );
 }
 
-export default Sidebar;
+export default SideBar;
