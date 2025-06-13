@@ -2,6 +2,11 @@ from rest_framework import generics, status
 from rest_framework.response import Response
 from .serializers import RegisterSerializer, LoginSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from django.core.mail import send_mail
+
+from .models import CustomUser
 
 class RegisterView(generics.GenericAPIView):
     serializer_class = RegisterSerializer
@@ -29,3 +34,22 @@ class LoginView(generics.GenericAPIView):
             'refresh': str(refresh),
             'access': str(refresh.access_token),
         })
+
+class ForgotPasswordView(APIView):
+    def post(self, request):
+        email = request.data.get('email')
+        if not email:
+            return Response({'error': 'Email is required'}, status=400)
+        try:
+            user = CustomUser.objects.get(email=email)
+            # Gửi email (cần cấu hình EMAIL_BACKEND trong settings.py)
+            send_mail(
+                'Password Reset Link',
+                'Click here to reset your password: http://localhost:5173/reset-password',
+                'from@example.com',
+                [email],
+                fail_silently=False,
+            )
+            return Response({'message': 'Recovery link sent'}, status=200)
+        except CustomUser.DoesNotExist:
+            return Response({'error': 'User not found'}, status=400)

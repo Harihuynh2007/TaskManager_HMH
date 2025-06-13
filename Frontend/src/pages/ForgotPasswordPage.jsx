@@ -1,12 +1,18 @@
 import React, { useState } from "react";
-
+import axios from 'axios';
 
 function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert(`Recovery link sent to ${email}`);
+    try {
+      await axios.post(`${baseUrl}/api/accounts/forgot-password/`, { email });
+      alert(`Recovery link sent to ${email}`);
+    } catch (error) {
+      console.error(error.response?.data || 'Failed to send link');
+      alert('Failed to send recovery link');
+    }
   };
 
   return (
