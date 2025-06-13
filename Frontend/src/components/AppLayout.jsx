@@ -1,16 +1,38 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SideBar from "./SideBar";
 import TaskDetailsCard from "../features/tasks/TaskDetailsCard";
 import { Outlet } from "react-router-dom";
 
 function AppLayout() {
   const [showTaskPopup, setShowTaskPopup] = useState(false);
+  const [userProfile, setUserProfile] = useState({
+    fullName: "",
+    profession: "",
+    avatarUrl: "",
+  });
+  
+  useEffect(() => {
+    const stored = JSON.parse(localStorage.getItem("userProfile") || "{}");
+    setUserProfile(stored);
+  }, []);
+
+  useEffect(() => {
+    const handler = () => {
+      const stored = JSON.parse(localStorage.getItem("userProfile") || "{}");
+      setUserProfile(stored);
+    };
+    window.addEventListener("storage", handler);
+    return () => window.removeEventListener("profileChanged", handler);
+  }, []);
 
   return (
     <>
       <div className="flex min-h-screen">
-        <SideBar onOpenTask={() => setShowTaskPopup(true)} />
-
+        <SideBar
+          onOpenTask={() => setShowTaskPopup(true)}
+          userProfile={userProfile}
+        />
+      
         <main className="flex-1 p-6 bg-gray-50 overflow-auto">
           <Outlet />
         </main>

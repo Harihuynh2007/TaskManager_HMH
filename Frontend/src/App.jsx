@@ -5,6 +5,7 @@ import RegisterPage from './pages/RegisterPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import AppLayout from './components/AppLayout';
 import DashboardPage from './pages/DashboardPage';
+import SettingPage from './pages/SettingPage';
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
 
         <Route element={<AppLayout />}>
           <Route path="/dashboard" element={<DashboardPage />} />
-          
+          <Route path="/settings" element={<SettingPage />} />
         </Route>
         
       </Routes>
