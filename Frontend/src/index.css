@@ -3,3 +3,9 @@
 @tailwind utilities;
 
 
+/* Ẩn icon “show password” native trên Chrome/Edge */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear,
+input[type="password"]::-webkit-textfield-decoration-button {
+  display: none;
+}
