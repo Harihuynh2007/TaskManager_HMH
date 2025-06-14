@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react';
+import ChangePasswordSection from '../components/settings/ChangePasswordSection';
 
 const TABS = ['Profile', 'Preferences', 'Notifications', 'Security', 'Integrations'];
 
 export default function SettingsPage() {
   const [activeTab, setActiveTab] = useState('Profile');
 
-  // States for each section
+  // States cho các mục
   const [profile, setProfile] = useState({ fullName: '', profession: '', avatarUrl: '' });
   const [preferences, setPreferences] = useState({ theme: 'light', defaultView: 'list', timezone: '', dateFormat: 'dd/MM/yyyy' });
   const [notifications, setNotifications] = useState({ taskReminders: true, emailAlerts: true, emailLeadTime: '1h', pushNotifications: false });
-  const [security, setSecurity] = useState({ currentPassword: '', newPassword: '', confirmPassword: '', twoFA: false });
+  const [security, setSecurity] = useState({ twoFA: false }); // đã bỏ các field mật khẩu ra khỏi đây
   const [integrations, setIntegrations] = useState({ calendarSync: false, exportFormat: 'csv' });
 
-  // Load saved settings
+  // Load dữ liệu từ localStorage
   useEffect(() => {
     const saved = JSON.parse(localStorage.getItem('appSettings') || '{}');
     if (saved.profile) setProfile(saved.profile);
@@ -52,7 +53,7 @@ export default function SettingsPage() {
         ))}
       </div>
 
-      {/* Content */}
+      {/* Nội dung từng tab */}
       <div className="space-y-6">
         {activeTab === 'Profile' && (
           <div className="space-y-4">
@@ -182,34 +183,8 @@ export default function SettingsPage() {
         )}
 
         {activeTab === 'Security' && (
-          <div className="space-y-4 max-w-md">
-            <div>
-              <label className="block text-sm font-medium mb-1">Current Password</label>
-              <input
-                type="password"
-                value={security.currentPassword}
-                onChange={e => setSecurity(prev => ({ ...prev, currentPassword: e.target.value }))}
-                className="w-full border px-3 py-2 rounded"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-1">New Password</label>
-              <input
-                type="password"
-                value={security.newPassword}
-                onChange={e => setSecurity(prev => ({ ...prev, newPassword: e.target.value }))}
-                className="w-full border px-3 py-2 rounded"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-1">Confirm Password</label>
-              <input
-                type="password"
-                value={security.confirmPassword}
-                onChange={e => setSecurity(prev => ({ ...prev, confirmPassword: e.target.value }))}
-                className="w-full border px-3 py-2 rounded"
-              />
-            </div>
+          <div className="space-y-6 max-w-md">
+            <ChangePasswordSection />
             <label className="flex items-center gap-2">
               <input
                 type="checkbox"
@@ -250,15 +225,17 @@ export default function SettingsPage() {
         )}
       </div>
 
-      {/* Save Button */}
-      <div className="mt-8 flex justify-end">
-        <button
-          onClick={handleSave}
-          className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded font-semibold transition"
-        >
-          Save All Changes
-        </button>
-      </div>
+      {/* Nút lưu thiết lập */}
+      {activeTab !== 'Security' && (
+        <div className="mt-8 text-right">
+          <button
+            onClick={handleSave}
+            className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition"
+          >
+            Save Settings
+          </button>
+        </div>
+      )}
     </div>
   );
 }

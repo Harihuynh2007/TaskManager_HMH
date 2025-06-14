@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import SideBar from "./SideBar";
-import TaskDetailsCard from "../features/tasks/TaskDetailsCard";
+import SideBar from "../Auth/SideBar";
+import TaskDetailsCard from "../../features/tasks/TaskDetailsCard";
 import { Outlet } from "react-router-dom";
 
 function AppLayout() {
