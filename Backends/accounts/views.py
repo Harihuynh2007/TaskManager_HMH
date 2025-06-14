@@ -9,6 +9,8 @@ from django.core.mail import send_mail
 from .models import CustomUser
 from .serializers import RegisterSerializer, LoginSerializer
 
+from rest_framework.permissions import IsAuthenticated
+from .serializers import ChangePasswordSerializer
 
 class RegisterView(generics.GenericAPIView):
     """
@@ -38,6 +40,7 @@ class LoginView(generics.GenericAPIView):
     """
     serializer_class = LoginSerializer
     permission_classes = [AllowAny]
+    
 
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -87,3 +90,19 @@ class ForgotPasswordView(APIView):
             status=status.HTTP_200_OK
         )
 
+class ChangePasswordView(APIView):
+    """
+    POST /api/accounts/change-password/
+    Người dùng đang đăng nhập gửi old_password + new_password để đổi mật khẩu
+    """
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, *args, **kwargs):
+        serializer = ChangePasswordSerializer(data=request.data, context={'request' : request})
+        if serializer.is_valid():
+            user = request.user
+            user.set_password(serializer.validated_data['new_password'])
+            user.save()
+            return Response({"error": "Đổi mật khẩu thất bại", "details": serializer.errors}, status=400)
+
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

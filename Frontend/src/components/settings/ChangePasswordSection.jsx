@@ -7,6 +7,9 @@ function ChangePasswordSection() {
     confirmPassword: '',
   });
 
+  const token = localStorage.getItem("access_token");
+  console.log("Token gửi lên là:", token);
+
   const handleChangePassword = async () => {
     const { currentPassword, newPassword, confirmPassword } = security;
     if (!currentPassword || !newPassword || !confirmPassword) {
